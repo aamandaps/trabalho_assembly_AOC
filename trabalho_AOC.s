@@ -50,20 +50,18 @@ senao:
 	
 enquanto:
 	# Enquanto inicio<fim, faça
-	blt $s1 , $s2 , continua1
+	blt $s1 , $s2 , continua
 	j fim
 
-continua1:
+continua:
 	# Se inicio(ano1) % 400 == 0, então
 	rem $t0, $s1 , 400
 	beq $t0 , 0 , proxAno
 	
-continua2:
-	# Se inicio(ano1) % 100 == 0, então
+	# # Se inicio(ano1) % 100 == 0 e não %400, então
 	rem $t0 , $s1 , 100
 	beq $t0 , 0 , naoBissexto
 	
-continua3:
 	# Se inicio(ano1) % 4 == 0, então
 	rem $t0, $s1 , 4
 	beq $t0 , 0 , proxAno
