@@ -4,22 +4,22 @@
 	saida: .asciiz "\n A quant. de anos não bissextos é: "
 .text
 main:
-	#Recebendo o primeiro ano
+	# Recebendo o primeiro ano
 	li $v0, 4
 	la $a0, ano1
 	syscall
 	
-	#Leitura do primeiro ano
+	# Leitura do primeiro ano
 	li $v0, 5
 	syscall
 	add $t1 , $v0 , $zero # ano1 = t1
 	
-	#Recebendo o segundo ano
+	# Recebendo o segundo ano
 	li $v0, 4
 	la $a0, ano2
 	syscall
 	
-	#Leitura do segundo ano
+	# Leitura do segundo ano
 	li $v0, 5
 	syscall
 	add $t2 , $v0 , $zero # ano2 = t2
@@ -44,37 +44,37 @@ senao:
 	add $s2 , $t2 , $zero # fim(s2) = t2
 	sub $s0 , $s2 , $s1   # diferença 
 	
-	# Se diferença>1000, então
+	# Se diferença > 1000, então
 	bgt $s0 , 1000 , main
 	j enquanto # Senao
 	
 enquanto:
-	# Enquanto inicio<fim, faça
+	# Enquanto inicio < fim, faça
 	blt $s1 , $s2 , continua
 	j fim
 
 continua:
-	# Se inicio(ano1) % 400 == 0, então
+	# Se inicio % 400 == 0, então
 	rem $t0, $s1 , 400
 	beq $t0 , 0 , proxAno
 	
-	# # Se inicio(ano1) % 100 == 0 e não %400, então
+	# Se inicio % 100 == 0 e não %400, então
 	rem $t0 , $s1 , 100
 	beq $t0 , 0 , naoBissexto
 	
-	# Se inicio(ano1) % 4 == 0, então
+	# Se inicio % 4 == 0, então
 	rem $t0, $s1 , 4
 	beq $t0 , 0 , proxAno
 	
 	j naoBissexto
 	
 naoBissexto:
-	add $s3 , $s3 , 1 # Incrementando ano não bissexto
+	add $s3 , $s3 , 1 # Incrementando anos não bissextos
 	
 	j proxAno
 	
 proxAno:
-	add $s1 , $s1 ,1 # Incrementando ano1
+	add $s1 , $s1 ,1 # Incrementando inicio
 	j enquanto
 	
 fim:
